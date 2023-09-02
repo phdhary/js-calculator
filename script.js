@@ -20,8 +20,9 @@ const operate = (operator, a, b) => {
   }
 };
 
-const numberButtons = document.querySelectorAll("button.number");
-const bottomScreen = document.querySelector(".bottom");
+const numberButtons = document.querySelectorAll("button.number"),
+  bottomScreen = document.querySelector(".bottom"),
+  deleteButton = document.querySelector(".delete");
 
 function onClickNumber() {
   console.log(this.textContent);
@@ -31,6 +32,12 @@ function onClickNumber() {
   bottomScreen.textContent += this.textContent;
 }
 
+function onClickDelete() {
+  bottomScreen.textContent = bottomScreen.textContent.slice(0, -1);
+}
+
 numberButtons.forEach((button) => {
   button.onclick = onClickNumber;
 });
+
+deleteButton.onclick = onClickDelete;
