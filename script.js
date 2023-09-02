@@ -23,7 +23,8 @@ const operate = (operator, a, b) => {
 const numberButtons = document.querySelectorAll("button.number"),
   bottomScreen = document.querySelector(".bottom"),
   deleteButton = document.querySelector(".delete"),
-  operatorButtons = document.querySelectorAll("button.operator");
+  operatorButtons = document.querySelectorAll("button.operator"),
+  topScreen = document.querySelector(".top");
 
 function onClickNumber() {
   console.log(this.textContent);
@@ -40,6 +41,7 @@ function onClickDelete() {
 function onClickOperator() {
   firstNumber = bottomScreen.textContent;
   operator = this.textContent;
+  topScreen.textContent = `${firstNumber} ${operator}`;
 }
 
 numberButtons.forEach((button) => {
