@@ -1,38 +1,125 @@
+:root {
+  color-scheme: light dark;
+  --width: 400px;
+  --height: 500px;
+  --base: #191724;
+  --surface: #1f1d2e;
+  --overlay: 38, 35, 58;
+  --text: #e0def4;
+  --pine: 49, 116, 143;
+  --love: #eb6f92;
+  --hl-med: #403d52;
+  --foam: #9ccfd8;
+  --gold: #f6c177;
+  --hl-low: #21202e;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --width: 400px;
+    --height: 500px;
+    --base: #faf4ed;
+    --surface: #fffaf3;
+    --overlay: 242, 233, 222;
+    --text: #575279;
+    --pine: 40, 105, 131;
+    --love: #b4637a;
+    --hl-med: #dfdad9;
+    --foam: #56949f;
+    --gold: #ea9d34;
+    --hl-low: #f4ede8;
+  }
+}
+
+body {
+  background-color: var(--base);
+  color: var(--text);
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-  height: 500px;
+  justify-content: center;
+  width: var(--width);
+  height: var(--height);
   margin: auto;
+  background-color: var(--surface);
+  padding: 30px 20px;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(var(--overlay), 0.8);
 }
 
 .screen {
-  background-color: lightgrey;
-  width: 500px;
+  text-align: end;
+  background-color: var(--base);
+  width: var(--width);
   padding: 20px 0;
+  margin: 20px 0;
+  border: 2px solid var(--hl-med);
+  border-radius: 30px;
 }
 
-.top,
-.bottom {
+#top,
+#bottom {
   padding: 0 20px;
   font-size: 2em;
   height: 1em;
 }
 
+#top {
+  font-size: 1em;
+}
+
 .buttons {
   display: grid;
+  gap: 10px;
   grid-template-columns: repeat(4, 2fr);
   grid-template-rows: repeat(5, 2fr);
   width: 100%;
   height: 100%;
+  user-select: none;
 }
 
 .buttons > button {
   font-size: 2em;
+  background-color: rgb(var(--overlay));
+  border: 2px solid var(--hl-med);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }
 
-.clear,
-.equal {
+.buttons > button:active {
+  background-color: rgba(var(--button-pressed-bg), 0.1);
+  font-size: 1.8em;
+}
+
+#clear,
+#equal {
   grid-column: span 2;
+}
+
+#equal {
+  background-color: rgb(var(--pine));
+  border-color: rgb(var(--pine));
+  font-size: 3em;
+  color: var(--hl-low);
+}
+
+#equal:active {
+  background-color: rgba(var(--pine), 0.7);
+  font-size: 2.5em;
+}
+
+#clear {
+  color: var(--love);
+}
+
+.operator {
+  color: var(--foam);
+}
+
+#delete {
+  color: var(--gold);
 }
