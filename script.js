@@ -21,13 +21,13 @@ const operate = (operator, a, b) => {
 };
 
 const numberButtons = document.querySelectorAll("button.number"),
-  bottomScreen = document.querySelector(".bottom"),
-  deleteButton = document.querySelector(".delete"),
   operatorButtons = document.querySelectorAll("button.operator"),
-  topScreen = document.querySelector(".top"),
-  equalButton = document.querySelector(".equal"),
-  clearButton = document.querySelector(".clear"),
-  dotButton = document.querySelector(".dot");
+  topScreen = document.getElementById("top"),
+  bottomScreen = document.getElementById("bottom"),
+  deleteButton = document.getElementById("delete"),
+  equalButton = document.getElementById("equal"),
+  clearButton = document.getElementById("clear"),
+  dotButton = document.getElementById("dot");
 
 function onClickDot() {
   if (!bottomScreen.textContent.includes(".")) {
