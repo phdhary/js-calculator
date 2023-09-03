@@ -37,8 +37,11 @@ function onClickClear() {
 }
 
 function onClickEqual() {
-  if (bottomScreenFlag || bottomScreen.textContent === "0" || operator === null)
-    return;
+  getResult(true);
+}
+
+function getResult(displaySummary) {
+  if (bottomScreenFlag || operator === null) return;
   secondNumber = bottomScreen.textContent;
   const result = operate(
     operator,
@@ -46,7 +49,9 @@ function onClickEqual() {
     parseInt(secondNumber)
   );
   bottomScreen.textContent = result;
-  topScreen.textContent = `${firstNumber} ${operator} ${secondNumber} = ${result}`;
+  if (displaySummary) {
+    topScreen.textContent = `${firstNumber} ${operator} ${secondNumber} = `;
+  }
   operator = null;
 }
 
@@ -65,16 +70,7 @@ function onClickDelete() {
 let bottomScreenFlag = false;
 function onClickOperator() {
   if (operator !== null) {
-    if (bottomScreenFlag) return;
-    secondNumber = bottomScreen.textContent;
-    const result = operate(
-      operator,
-      parseInt(firstNumber),
-      parseInt(secondNumber)
-    );
-    bottomScreen.textContent = result;
-    operator = null;
-    // console.table({ firstNumber, operator, secondNumber, bottomScreenFlag });
+    getResult();
   }
   firstNumber = bottomScreen.textContent;
   operator = this.textContent;
