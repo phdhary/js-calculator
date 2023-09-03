@@ -43,6 +43,14 @@ function onClickEqual() {
 function getResult(displaySummary) {
   if (bottomScreenFlag || operator === null) return;
   secondNumber = bottomScreen.textContent;
+  if (operator === "÷" && (firstNumber === "0" || secondNumber === "0")) {
+    const a = document.createElement("a");
+    a.href = "https://en.wikipedia.org/wiki/Division_by_zero";
+    a.target = "_blank";
+    if (window.confirm("You can't do that, wanna see why?")) a.click();
+    onClickClear();
+    return;
+  }
   const result = operate(
     operator,
     parseInt(firstNumber),
