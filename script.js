@@ -26,7 +26,15 @@ const numberButtons = document.querySelectorAll("button.number"),
   operatorButtons = document.querySelectorAll("button.operator"),
   topScreen = document.querySelector(".top"),
   equalButton = document.querySelector(".equal"),
-  clearButton = document.querySelector(".clear");
+  clearButton = document.querySelector(".clear"),
+  dotButton = document.querySelector(".dot");
+
+function onClickDot() {
+  if (bottomScreen.textContent.length === 1) {
+    bottomScreen.textContent += this.textContent;
+  }
+  // bottomScreen.textContent += this.textContent;
+}
 
 function onClickClear() {
   operator = null;
@@ -98,3 +106,4 @@ deleteButton.onclick = onClickDelete;
 
 equalButton.onclick = onClickEqual;
 clearButton.onclick = onClickClear;
+dotButton.onclick = onClickDot;
