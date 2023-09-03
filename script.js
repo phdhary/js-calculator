@@ -30,10 +30,9 @@ const numberButtons = document.querySelectorAll("button.number"),
   dotButton = document.querySelector(".dot");
 
 function onClickDot() {
-  if (bottomScreen.textContent.length === 1) {
+  if (!bottomScreen.textContent.includes(".")) {
     bottomScreen.textContent += this.textContent;
   }
-  // bottomScreen.textContent += this.textContent;
 }
 
 function onClickClear() {
@@ -61,8 +60,8 @@ function getResult(displaySummary) {
   }
   const result = operate(
     operator,
-    parseFloat(firstNumber),
-    parseFloat(secondNumber)
+    parseFloat(firstNumber).toFixed(3),
+    parseFloat(secondNumber).toFixed(3)
   );
   bottomScreen.textContent = result;
   if (displaySummary) {
