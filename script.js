@@ -58,11 +58,17 @@ function getResult(displaySummary) {
     onClickClear();
     return;
   }
-  const result = operate(
+
+  let result = operate(
     operator,
-    parseFloat(firstNumber).toFixed(3),
-    parseFloat(secondNumber).toFixed(3)
+    parseFloat(firstNumber),
+    parseFloat(secondNumber)
   );
+
+  if (result - Math.floor(result) !== 0) {
+    result = result.toPrecision(5);
+  }
+
   bottomScreen.textContent = result;
   if (displaySummary) {
     topScreen.textContent = `${firstNumber} ${operator} ${secondNumber} = `;
@@ -84,6 +90,7 @@ function onClickDelete() {
 
 let bottomScreenFlag = false;
 function onClickOperator() {
+  if (bottomScreen.textContent === "0") return;
   if (operator !== null) {
     getResult();
   }
