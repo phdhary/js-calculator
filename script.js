@@ -24,7 +24,21 @@ const numberButtons = document.querySelectorAll("button.number"),
   bottomScreen = document.querySelector(".bottom"),
   deleteButton = document.querySelector(".delete"),
   operatorButtons = document.querySelectorAll("button.operator"),
-  topScreen = document.querySelector(".top");
+  topScreen = document.querySelector(".top"),
+  equalButton = document.querySelector(".equal");
+
+function onClickEqual() {
+  if (bottomScreenFlag) return;
+  secondNumber = bottomScreen.textContent;
+  const result = operate(
+    operator,
+    parseInt(firstNumber),
+    parseInt(secondNumber)
+  );
+  bottomScreen.textContent = result;
+  topScreen.textContent = `${firstNumber} ${operator} ${secondNumber} = ${result}`;
+  operator = null;
+}
 
 function onClickNumber() {
   if (bottomScreen.textContent === "0" || bottomScreenFlag) {
@@ -67,3 +81,5 @@ operatorButtons.forEach((button) => {
 });
 
 deleteButton.onclick = onClickDelete;
+
+equalButton.onclick = onClickEqual;
