@@ -28,7 +28,8 @@ const numberButtons = document.querySelectorAll("button.number"),
   equalButton = document.querySelector(".equal");
 
 function onClickEqual() {
-  if (bottomScreenFlag) return;
+  if (bottomScreenFlag || bottomScreen.textContent === "0" || operator === null)
+    return;
   secondNumber = bottomScreen.textContent;
   const result = operate(
     operator,
