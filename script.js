@@ -27,9 +27,9 @@ const numberButtons = document.querySelectorAll("button.number"),
   topScreen = document.querySelector(".top");
 
 function onClickNumber() {
-  console.log(this.textContent);
-  if (bottomScreen.textContent === "0") {
+  if (bottomScreen.textContent === "0" || bottomScreenFlag) {
     bottomScreen.textContent = "";
+    bottomScreenFlag = false;
   }
   bottomScreen.textContent += this.textContent;
 }
@@ -38,10 +38,23 @@ function onClickDelete() {
   bottomScreen.textContent = bottomScreen.textContent.slice(0, -1);
 }
 
+let bottomScreenFlag = false;
 function onClickOperator() {
+  if (bottomScreen.textContent !== "") {
+    secondNumber = bottomScreen.textContent;
+    const result = operate(
+      operator,
+      parseInt(firstNumber),
+      parseInt(secondNumber)
+    );
+    bottomScreen.textContent = result;
+    operator = null;
+    // console.table({ firstNumber, operator, secondNumber, bottomScreenFlag });
+  }
   firstNumber = bottomScreen.textContent;
   operator = this.textContent;
   topScreen.textContent = `${firstNumber} ${operator}`;
+  bottomScreenFlag = true;
 }
 
 numberButtons.forEach((button) => {
