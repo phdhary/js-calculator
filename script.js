@@ -40,7 +40,8 @@ function onClickDelete() {
 
 let bottomScreenFlag = false;
 function onClickOperator() {
-  if (bottomScreen.textContent !== "") {
+  if (operator !== null) {
+    if (bottomScreenFlag) return;
     secondNumber = bottomScreen.textContent;
     const result = operate(
       operator,
@@ -55,6 +56,7 @@ function onClickOperator() {
   operator = this.textContent;
   topScreen.textContent = `${firstNumber} ${operator}`;
   bottomScreenFlag = true;
+  console.table({ firstNumber, operator, secondNumber, bottomScreenFlag });
 }
 
 numberButtons.forEach((button) => {
