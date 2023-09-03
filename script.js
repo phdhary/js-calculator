@@ -61,8 +61,8 @@ function getResult(displaySummary) {
   }
   const result = operate(
     operator,
-    parseInt(firstNumber),
-    parseInt(secondNumber)
+    parseFloat(firstNumber),
+    parseFloat(secondNumber)
   );
   bottomScreen.textContent = result;
   if (displaySummary) {
