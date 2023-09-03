@@ -106,12 +106,47 @@ function onClickOperator() {
 }
 
 function assignNumberButtons(button) {
-  button.onclick = onClickNumber;
+  button.onclick = () => onClickNumber(button.textContent);
+  onKeyEvent(button, "button-active", button.textContent);
 }
 
 function assignOperatorButtons(button) {
-  button.onclick = onClickOperator;
+  button.onclick = () => onClickOperator(button.textContent);
+  switch (button.textContent) {
+    case "×":
+      onKeyEvent(button, "button-active", "*");
+      break;
+    case "÷":
+      onKeyEvent(button, "button-active", "/");
+      break;
+    default:
+      onKeyEvent(button, "button-active", button.textContent);
+      break;
+  }
 }
+
+function onKeyEvent(element, cssClass, ...keys) {
+  element.title = `keyboard: ${keys}`;
+  window.addEventListener("keydown", (event) => {
+    keys.forEach((key) => {
+      if (event.key === "/") event.preventDefault();
+      if (event.key === key) {
+        element.onclick();
+        element.classList.add(cssClass);
+      }
+    });
+  });
+  window.addEventListener("keyup", (event) => {
+    keys.forEach((key) => {
+      if (event.key === key) element.classList.remove(cssClass);
+    });
+  });
+}
+
+onKeyEvent(deleteButton, "button-active", "Backspace");
+onKeyEvent(clearButton, "button-active", "c", "Escape");
+onKeyEvent(equalButton, "equal-active", "=", "Enter");
+onKeyEvent(dotButton, "button-active", ".");
 
 operatorButtons.forEach(assignOperatorButtons);
 numberButtons.forEach(assignNumberButtons);

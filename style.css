@@ -90,7 +90,10 @@ body {
   transition: all 0.1s ease-in-out;
 }
 
-.buttons > button:active {
+.buttons > button:active,
+button.button-active,
+#delete.button-active,
+#clear.button-active {
   background-color: rgba(var(--button-pressed-bg), 0.1);
   font-size: 1.8em;
 }
@@ -107,7 +110,8 @@ body {
   color: var(--hl-low);
 }
 
-#equal:active {
+#equal:active,
+.buttons > #equal.equal-active {
   background-color: rgba(var(--pine), 0.7);
   font-size: 2.5em;
 }
