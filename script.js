@@ -32,7 +32,7 @@ const numberButtons = document.querySelectorAll("button.number"),
 
 function onClickDot() {
   if (!bottomScreen.textContent.includes(".")) {
-    bottomScreen.textContent += this.textContent;
+    bottomScreen.textContent += ".";
   }
 }
 
@@ -48,59 +48,57 @@ function onClickEqual() {
   getResult(true);
 }
 
-function divideByZero() {
+function showDivideByZeroMessage() {
   const a = document.createElement("a");
   a.href = "https://en.wikipedia.org/wiki/Division_by_zero";
   a.target = "_blank";
   if (window.confirm("You can't do that, wanna see why?")) a.click();
   onClickClear();
-  return;
 }
 
 function getResult(displaySummary) {
   if (shouldClearBottomScreen || operator === null) return;
-
   secondNumber = bottomScreen.textContent;
-
   if (operator === "÷" && (firstNumber === "0" || secondNumber === "0")) {
-    divideByZero();
+    showDivideByZeroMessage();
+    return;
   }
-
   let result = operate(
     operator,
     parseFloat(firstNumber),
     parseFloat(secondNumber)
   );
   if (result - Math.floor(result) !== 0) {
-    result = result.toPrecision(5);
+    let resultLength = result.toString().length - 2;
+    result = result.toPrecision(resultLength < 7 ? resultLength : 7);
   }
   bottomScreen.textContent = result;
   if (displaySummary) {
     topScreen.textContent = `${firstNumber} ${operator} ${secondNumber} = `;
   }
-
   operator = null;
 }
 
-function onClickNumber() {
+function onClickNumber(number) {
+  if (bottomScreen.textContent.length === 15) return;
   if (bottomScreen.textContent === "0" || shouldClearBottomScreen) {
     bottomScreen.textContent = "";
     shouldClearBottomScreen = false;
   }
-  bottomScreen.textContent += this.textContent;
+  bottomScreen.textContent += number;
 }
 
 function onClickDelete() {
   bottomScreen.textContent = bottomScreen.textContent.slice(0, -1);
 }
 
-function onClickOperator() {
+function onClickOperator(operatorSymbol) {
   if (bottomScreen.textContent === "0") return;
   if (operator !== null) {
     getResult();
   }
   firstNumber = bottomScreen.textContent;
-  operator = this.textContent;
+  operator = operatorSymbol;
   topScreen.textContent = `${firstNumber} ${operator}`;
   shouldClearBottomScreen = true;
 }
